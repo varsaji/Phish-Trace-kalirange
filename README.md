@@ -33,7 +33,67 @@ Phishing remains one of the most common ways into an organization. Proper analys
 
 ## Install
 
-No Python is needed. Download the program for your system:
+No Python is needed. Open a terminal and run the commands for your system. They download PhishTrace, verify its checksum, install the `phishtrace` command and show its version.
+
+### macOS, Apple Silicon (M1 and later)
+
+```bash
+curl -fLO https://github.com/varsaji/Phish-Trace-kalirange/releases/latest/download/phishtrace-macos-arm64
+curl -fLO https://github.com/varsaji/Phish-Trace-kalirange/releases/latest/download/phishtrace-macos-arm64.sha256
+shasum -a 256 -c phishtrace-macos-arm64.sha256
+chmod +x phishtrace-macos-arm64
+sudo mv phishtrace-macos-arm64 /usr/local/bin/phishtrace
+rm phishtrace-macos-arm64.sha256
+phishtrace version
+```
+
+### macOS, Intel
+
+```bash
+curl -fLO https://github.com/varsaji/Phish-Trace-kalirange/releases/latest/download/phishtrace-macos-x64
+curl -fLO https://github.com/varsaji/Phish-Trace-kalirange/releases/latest/download/phishtrace-macos-x64.sha256
+shasum -a 256 -c phishtrace-macos-x64.sha256
+chmod +x phishtrace-macos-x64
+sudo mv phishtrace-macos-x64 /usr/local/bin/phishtrace
+rm phishtrace-macos-x64.sha256
+phishtrace version
+```
+
+### Linux, x64
+
+```bash
+curl -fLO https://github.com/varsaji/Phish-Trace-kalirange/releases/latest/download/phishtrace-linux-x64
+curl -fLO https://github.com/varsaji/Phish-Trace-kalirange/releases/latest/download/phishtrace-linux-x64.sha256
+sha256sum -c phishtrace-linux-x64.sha256
+chmod +x phishtrace-linux-x64
+sudo mv phishtrace-linux-x64 /usr/local/bin/phishtrace
+rm phishtrace-linux-x64.sha256
+phishtrace version
+```
+
+`sudo` asks for your password so the command can be installed for all users.
+
+### Windows, x64
+
+Run these in PowerShell:
+
+```powershell
+$dir = "$env:LOCALAPPDATA\PhishTrace"
+$url = "https://github.com/varsaji/Phish-Trace-kalirange/releases/latest/download/phishtrace-windows-x64.exe"
+New-Item -ItemType Directory -Force $dir | Out-Null
+Invoke-WebRequest $url -OutFile "$dir\phishtrace.exe"
+$expected = (-split (Invoke-RestMethod "$url.sha256"))[0]
+if ((Get-FileHash "$dir\phishtrace.exe").Hash -ne $expected) { Remove-Item "$dir\phishtrace.exe"; throw "Checksum failed" }
+[Environment]::SetEnvironmentVariable("Path", [Environment]::GetEnvironmentVariable("Path", "User") + ";$dir", "User")
+```
+
+Close PowerShell, open it again, then check it works:
+
+```powershell
+phishtrace version
+```
+
+### Download in your browser instead
 
 | System | Download |
 | --- | --- |
@@ -42,37 +102,15 @@ No Python is needed. Download the program for your system:
 | Linux, x64 | [`phishtrace-linux-x64`](https://github.com/varsaji/Phish-Trace-kalirange/releases/latest/download/phishtrace-linux-x64) |
 | Windows, x64 | [`phishtrace-windows-x64.exe`](https://github.com/varsaji/Phish-Trace-kalirange/releases/latest/download/phishtrace-windows-x64.exe) |
 
-Compare the file's checksum with the matching `.sha256` file on the [Releases page](https://github.com/varsaji/Phish-Trace-kalirange/releases/latest):
+The programs aren't signed yet, so browser downloads trigger a security prompt. On macOS, after moving the file to `/usr/local/bin/phishtrace`, allow it with:
 
 ```bash
-shasum -a 256 phishtrace-macos-arm64
+sudo xattr -d com.apple.quarantine /usr/local/bin/phishtrace
 ```
 
-**macOS and Linux:** make it runnable and put it on your PATH.
+On Windows, if SmartScreen warns you, check the checksum, then choose **More info** and **Run anyway**.
 
-```bash
-chmod +x phishtrace-macos-arm64
-```
-
-```bash
-sudo mv phishtrace-macos-arm64 /usr/local/bin/phishtrace
-```
-
-**macOS security prompt:** the program isn't signed yet, so macOS blocks it the first time. After checking the checksum, allow it with:
-
-```bash
-xattr -d com.apple.quarantine /usr/local/bin/phishtrace
-```
-
-**Windows:** rename the file to `phishtrace.exe` and run it from a terminal. If SmartScreen warns you, check the checksum, then choose **More info** and **Run anyway**.
-
-Check that it works:
-
-```bash
-phishtrace version
-```
-
-The first run can take a few seconds while the program unpacks itself.
+The first run can take a few seconds while the program unpacks itself. Later runs start almost instantly.
 
 ## Analyze your first email
 
