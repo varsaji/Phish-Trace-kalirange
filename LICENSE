@@ -1,0 +1,36 @@
+PhishTrace End User License Agreement
+
+Copyright (c) 2026 Uzair Varsaji, trading as KaliRange. All rights reserved.
+
+PhishTrace, including its compiled programs, source code, detection logic,
+scoring rules and documentation, is the intellectual property of the copyright
+holder. It is licensed, not sold.
+
+1. Permitted use. You may download, install and run the unmodified compiled
+   program, free of charge, for personal, educational and internal business
+   purposes, including defensive security work and training.
+
+2. Restrictions. You may not:
+   a. reverse engineer, decompile, disassemble or try to extract the source
+      code, detection logic or scoring rules, except where the law gives you
+      a right to do so that cannot be waived;
+   b. modify the program or make derivative works of it;
+   c. sell, rent, sublicense or redistribute the program, or offer it as a
+      hosted service, without written permission;
+   d. remove any copyright, ownership or license notice;
+   e. use the program to create, test or improve phishing campaigns or for
+      any other unlawful purpose.
+
+3. No warranty. THE PROGRAM IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+   EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR
+   PURPOSE AND NON-INFRINGEMENT. Results are heuristic and may be wrong.
+
+4. Limitation of liability. TO THE EXTENT THE LAW ALLOWS, THE COPYRIGHT HOLDER
+   IS NOT LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM THE
+   PROGRAM OR ITS USE.
+
+5. Termination. This license ends automatically if you breach it. You must then
+   stop using the program and delete all copies.
+
+Earlier versions published under the MIT License remain under that license for
+those copies only. It does not apply to this or any later version.
